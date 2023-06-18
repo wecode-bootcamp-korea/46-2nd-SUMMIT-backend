@@ -15,9 +15,15 @@ const createApp = () => {
   app.use(routers);
   app.use(globalErrorHandler);
 
+  const PORT = process.env.PORT
+
   app.get("/ping", (req, res) => {
     res.json({ message: "pong" });
   });
+
+  app.listen(PORT, () => {
+    console.log(`LISTENING_ON 127.0.0.1:${PORT}`)
+  })
 
   return app;
 };
