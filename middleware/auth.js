@@ -1,18 +1,16 @@
 const jwt = require("jsonwebtoken");
-const { catchAsync } = require('../middleware/error')
 
 
 const checkLogInToken = async (req, res, next) => {
   try {
     const accessToken = req.headers.authorization;
-    const secretKey = process.env.SECRET_KEY;
 
     if (!accessToken) {
       const error = new Error("NEED_ACCESS_TOKEN", 401);
       return res.status(error.statusCode).json({ message: error.message });
     }
 
-    const decoded = jwt.verify(accessToken, secretKey);
+    const decoded = jwt.verify(accessToken, process.env.JWT_SECRET);
 
     const user = await userDao.getUserById(decoded.id);
 

@@ -1,8 +1,8 @@
 -- migrate:up
-CREATE TABLE order_status (
+CREATE TABLE show_seats_status (
   id INT PRIMARY KEY,
   status VARCHAR(100)
 );
 
 -- migrate:down
-DROP TABLE order_status
+DROP TABLE show_seats_status

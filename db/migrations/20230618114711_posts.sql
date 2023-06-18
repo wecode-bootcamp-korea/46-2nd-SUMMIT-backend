@@ -1,5 +1,5 @@
 -- migrate:up
-CREATE TABLE post (
+CREATE TABLE posts (
   id INT PRIMARY KEY,
   users_id INT,
   post_type_id INT,
@@ -12,9 +12,9 @@ CREATE TABLE post (
   updated_at TIMESTAMP,
   deleted_at TIMESTAMP,
   FOREIGN KEY (users_id) REFERENCES users(id),
-  FOREIGN KEY (post_type_id) REFERENCES post_type(id)
+  FOREIGN KEY (post_type_id) REFERENCES post_types(id)
 );
 
 
 -- migrate:down
-DROP TABLE post
+DROP TABLE posts

@@ -1,9 +1,9 @@
 -- migrate:up
-CREATE TABLE users_grade (
+CREATE TABLE user_grades (
   id INT PRIMARY KEY,
   grad_name VARCHAR(200),
   grade_score INT
 );
 
 -- migrate:down
-DROP TABLE grade
+DROP TABLE user_grades
