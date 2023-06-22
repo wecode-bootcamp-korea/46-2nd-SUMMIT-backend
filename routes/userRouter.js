@@ -8,5 +8,7 @@ const router = express.Router();
 router.post('/kakao-login', userController.signInKakao);
 // router.get('/:userId', userController.);
 // router.get('/', checkLogInToken, userController.getUserById);
+router.post('/signup', userController.getUserById)
+
 
 module.exports = { router };

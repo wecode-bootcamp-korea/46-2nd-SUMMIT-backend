@@ -33,8 +33,13 @@ const signInKakao = async (kakaoToken) => {
   const getUserById = async (userId) => {
     return await userDao.getUserById(userId);
   };
+  
+  const paymentUser = async (name, email) => {
+    return await userDao.paymentUser(name,email);
+  }
 
 module.exports = {
     signInKakao,
-    getUserById
+    getUserById,
+    paymentUser
   }
