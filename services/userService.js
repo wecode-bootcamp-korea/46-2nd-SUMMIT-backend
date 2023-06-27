@@ -17,12 +17,12 @@ const signInKakao = async (kakaoToken) => {
 
     const kakaoId = data.id;
     const email = data.kakao_account.email;
-    const nickname = data.properties.nickname;
 
-    let user = await userDao.getUserByKakaoId(kakaoId);
+    let user = await userDao.getUserByKakaoId(kakaoId, email);
+    console.log(kakaoId)
     
     if (!user) {
-      user = await userDao.createUser(kakaoId, email, nickname);
+      user = await userDao.createUser(kakaoId, email);
     }
   
     const payLoad = { id: user.id };
