@@ -13,27 +13,25 @@ const signInKakao = async (kakaoToken) => {
     throw new Error("INVALID_KAKAO_TOKEN", 401);
   }
   const { data } = result;
+  console.log(data)
+    const kakaoId = data.id;
+    const email = data.kakao_account.email;
 
-  const kakaoId = data.id;
-  const email = data.kakao_account.email;
-  const name = data.properties.nickname;
-
-  let user = await userDao.getUserByKakaoId(kakaoId);
-
-  if (!user) {
-    user = await userDao.createUser(kakaoId, email, name);
-  }
-
-  const payLoad = { id: user.id };
-
-  const accessToken = jwt.sign(payLoad, process.env.JWT_SECRET);
-  console.log(accessToken);
-  return { accessToken: accessToken };
-};
-
-const getUserById = async (userId) => {
-  return await userDao.getUserById(userId);
-};
+    let user = await userDao.getUserByKakaoId(kakaoId, email);
+    
+    if (!user) {
+      user = await userDao.createUser(kakaoId, email);
+    }
+  
+    const payLoad = { id: user.id };
+  
+    const accessToken = jwt.sign(payLoad, process.env.JWT_SECRET);
+    return { accessToken: accessToken };
+  };
+  
+  const getUserById = async (userId) => {
+    return await userDao.getUserById(userId);
+  };
 
 module.exports = {
   signInKakao,

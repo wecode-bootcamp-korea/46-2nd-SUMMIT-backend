@@ -5,7 +5,6 @@ const userController = require('../controllers/userController');
 const router = express.Router();
 
 router.post('/kakao-login', userController.signInKakao);
-router.get('/:userId', checkLogInToken, userController.signInKakao);
-router.get('/', checkLogInToken, userController.getUserById);
+router.get('/:userId', checkLogInToken, userController.getUserById);
 
 module.exports = { router };
