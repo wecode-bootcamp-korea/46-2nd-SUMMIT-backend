@@ -22,19 +22,28 @@ const getUserById = async (userId) => {
   }
 };
 
-const getUserByKakaoId = async (kakaoId, email) => {
+const getUserByKakaoId = async (kakaoId) => {
   try {
     const [user] = await dataSource.query(
       `SELECT
         id,
-        email
+        email,
+        name,
+        phone_number,
+        kakao_id,
+        point,
+        created_at,
+        updated_at,
+        deleted_at
       FROM users
       WHERE kakao_id = ?`,
-      [kakaoId, email]
+      [kakaoId]
     );
     return user;
-  } catch (error) {
-    throw new Error("DataSource_Error");
+  } catch (err) {
+    const error = new Error("INVALID_DATA_INPUT");
+    error.statusCode = 400;
+    throw error;
   }
 };
 
@@ -66,8 +75,6 @@ const createUser = async (kakaoId, email) => {
     throw new Error("DataSource_Error: " + err.message);
   }
 };
-
-
 
 module.exports = {
   getUserById,

@@ -3,11 +3,15 @@ const userService = require('../services/userService');
 const { catchAsync } = require('../middlewares/error');
 
 const signInKakao = catchAsync(async (req,res) => {
-
     const kakaoToken = req.headers.authorization;
-    
-    if (!kakaoToken) throw new Error(401, 'need_kakaotoken');
 
+    if (!kakaoToken) {
+        
+      const error = new Error('need_kakaotoken');
+      error.statusCode = 401;
+
+      throw error
+    }
     const { accessToken } = await userService.signInKakao(kakaoToken);
     return res.status(200).json({ token: accessToken });
 });

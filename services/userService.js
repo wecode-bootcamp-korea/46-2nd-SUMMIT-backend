@@ -9,28 +9,33 @@ const signInKakao = async (kakaoToken) => {
       Authorization: `Bearer ${kakaoToken}`,
     },
   });
+  
   if (result.status !== 200) {
     throw new Error("INVALID_KAKAO_TOKEN", 401);
   }
-  const { data } = result;
-    const kakaoId = data.id;
-    const email = data.kakao_account.email;
 
-    let user = await userDao.getUserByKakaoId(kakaoId, email);
-    
-    if (!user) {
-      user = await userDao.createUser(kakaoId, email);
-    }
+  const { data } = result;
+
+  const kakaoId = data.id;
+  const email = data.kakao_account.email;
+
+  let user = await userDao.getUserByKakaoId(kakaoId);
   
-    const payLoad = { id: user.id };
+  if (!user) {
+    user = await userDao.createUser(kakaoId, email);
+  }
+
+  const payLoad = { id: user.id };
+
+  const accessToken = jwt.sign(payLoad, process.env.JWT_SECRET);
+
+
+  return { accessToken: accessToken };
+};
   
-    const accessToken = jwt.sign(payLoad, process.env.JWT_SECRET);
-    return { accessToken: accessToken };
-  };
-  
-  const getUserById = async (userId) => {
-    return await userDao.getUserById(userId);
-  };
+const getUserById = async (userId) => {
+  return await userDao.getUserById(userId);
+};
   
 module.exports = {
   signInKakao,
