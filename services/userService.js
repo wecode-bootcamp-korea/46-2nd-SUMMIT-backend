@@ -32,7 +32,7 @@ const signInKakao = async (kakaoToken) => {
   const getUserById = async (userId) => {
     return await userDao.getUserById(userId);
   };
-
+  
 module.exports = {
   signInKakao,
   getUserById,
