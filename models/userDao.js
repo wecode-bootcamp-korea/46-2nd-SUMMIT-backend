@@ -45,7 +45,7 @@ const createUser = async (kakaoId, email) => {
         users(
         kakao_id,
         email
-        )VALUES (?)`,
+        )VALUES (?, ?)`,
       [kakaoId, email]
     );
     const user = await dataSource.query(

@@ -13,7 +13,6 @@ const signInKakao = async (kakaoToken) => {
     throw new Error("INVALID_KAKAO_TOKEN", 401);
   }
   const { data } = result;
-  console.log(data)
     const kakaoId = data.id;
     const email = data.kakao_account.email;
 
