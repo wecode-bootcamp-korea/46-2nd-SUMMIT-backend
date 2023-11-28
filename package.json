@@ -23,5 +23,9 @@
     "supertest": "^6.3.3",
     "typeorm": "^0.3.16",
     "uuidv4": "^6.2.13"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3"
   }
 }
